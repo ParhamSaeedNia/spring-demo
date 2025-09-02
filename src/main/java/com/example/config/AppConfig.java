@@ -1,8 +1,20 @@
 package com.example.config;
 
-import org.springframework.context.annotation.*;
+import com.example.model.Customer;
+import com.example.service.CustomerService;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ComponentScan(basePackages = "com.example")  // tells Spring where to look
 public class AppConfig {
+
+    @Bean
+    public Customer customer() {
+        return new Customer("Parham");
+    }
+
+    @Bean
+    public CustomerService customerService() {
+        return new CustomerService();
+    }
 }

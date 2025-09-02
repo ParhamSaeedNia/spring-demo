@@ -1,14 +1,16 @@
 package com.example;
 
-import com.example.service.HelloService;
 import com.example.config.AppConfig;
+import com.example.model.Customer;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class MainApp {
     public static void main(String[] args) {
         ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
-        HelloService helloService = context.getBean(HelloService.class);
-        System.out.println(helloService.sayHello());
+
+        Customer customer = context.getBean(Customer.class);
+        System.out.println("Customer Name: " + customer.getName());
+        System.out.println("Customer Account Number: " + customer.getAccount().getAccountNumber());
     }
 }
