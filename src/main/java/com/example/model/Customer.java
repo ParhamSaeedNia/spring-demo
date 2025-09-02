@@ -1,14 +1,21 @@
 package com.example.model;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import jakarta.annotation.PostConstruct;
 
+@Component
 public class Customer {
 
-    private String name;
-    private Account account;
+    private String name = "Parham";
 
-    public Customer(String name) {
-        this.name = name;
+    @Autowired
+    private Account account; // Spring will inject the Account bean automatically
+
+    @PostConstruct
+    public void init() {
+        System.out.println("Customer initialized: " + name + " with account " + account.getAccountNumber());
     }
 
     public String getName() {
@@ -17,12 +24,5 @@ public class Customer {
 
     public Account getAccount() {
         return account;
-    }
-
-    @PostConstruct
-    public void init() {
-        // Automatically create an account after Customer is initialized
-        this.account = new Account();
-        System.out.println("Customer initialized: " + name + " with account " + account.getAccountNumber());
     }
 }
