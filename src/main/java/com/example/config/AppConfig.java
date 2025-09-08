@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Scope;
 
 @Configuration
 @ComponentScan(basePackages = "com.example") // scans for @Component beans
-@Import(DatabaseConfig.class) // Import beans from DatabaseConfig
+@Import({DatabaseConfig.class, DevConfig.class, ProdConfig.class, StageConfig.class}) // Import all configs
 public class AppConfig {
 
     @Bean
