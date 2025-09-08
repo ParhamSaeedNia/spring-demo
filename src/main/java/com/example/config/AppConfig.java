@@ -4,11 +4,13 @@ import com.example.model.Customer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
 
 @Configuration
 @ComponentScan(basePackages = "com.example") // scans for @Component beans
+@Import(DatabaseConfig.class) // Import beans from DatabaseConfig
 public class AppConfig {
 
     @Bean

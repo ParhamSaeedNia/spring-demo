@@ -2,6 +2,7 @@ package com.example;
 
 import com.example.config.AppConfig;
 import com.example.model.Customer;
+import com.example.service.DatabaseService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -12,9 +13,19 @@ public class MainApp {
         
         try (AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class)) {
             System.out.println("ApplicationContext created successfully!");
-            System.out.println("Notice: Lazy singleton bean was NOT created yet.\n");
+            System.out.println("Notice: @Import brought in DatabaseConfig beans, but lazy singleton was NOT created yet.\n");
 
-            System.out.println("=== LAZY LOADING DEMONSTRATION ===");
+            System.out.println("=== @IMPORT AND BEAN INJECTION DEMONSTRATION ===");
+            System.out.println("Getting DatabaseService (which uses imported database beans)...");
+            
+            // Get DatabaseService - this will show how beans from imported config are used
+            DatabaseService databaseService = context.getBean(DatabaseService.class);
+            System.out.println("\nDatabaseService created! Now calling connectToDatabase():");
+            databaseService.connectToDatabase();
+            
+            System.out.println("\nDatabase info: " + databaseService.getDatabaseInfo());
+            
+            System.out.println("\n=== LAZY LOADING DEMONSTRATION ===");
             System.out.println("About to request lazy singleton bean for the first time...");
             
             // Get lazy singleton bean - this will trigger its creation
